@@ -2,10 +2,11 @@ import type { Route } from "next";
 import Image from "next/image";
 import type { FunctionComponent } from "react";
 
-import { GlobeIcon, MapPinIcon } from "lucide-react";
+import { GlobeIcon } from "lucide-react";
 
 import { type PersonPage, peopleSource } from "@/lib/content";
 
+import { PersonMetadata } from "./PersonMetadata";
 import { SafeLink } from "./SafeLink";
 import {
   GitHubIcon,
@@ -18,6 +19,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { cn } from "@/lib/util/cn";
+import { computeInitials, computeStringHue } from "@/lib/util/helpers";
 
 export type PersonProps = {
   personId: string;
@@ -26,21 +28,10 @@ export type PersonProps = {
 };
 
 function authorMeta(person: PersonPage): { initials: string; color: string } {
-  let hash = 0;
-  for (const c of person.data.title.split("")) {
-    hash = c.charCodeAt(0) + ((hash << 5) - hash);
-  }
-  let color = "#";
-  for (let i = 0; i < 3; i += 1) {
-    const value = (hash >> (i * 8)) & 0xff;
-    color += `00${value.toString(16)}`.slice(-2);
-  }
+  const hue = computeStringHue(person.data.title);
+  const color = `hsl(${hue} 80% 50%)`;
 
-  let initials = "";
-  const nameParts = person.data.title.split(" ");
-  initials += nameParts[0].charAt(0).toUpperCase();
-  if (nameParts.length > 1)
-    initials += nameParts[nameParts.length - 1].charAt(0).toUpperCase();
+  const initials = computeInitials(person.data.title);
 
   return { initials, color };
 }
@@ -63,6 +54,7 @@ export const Person: FunctionComponent<PersonProps> = ({
       <HoverCardTrigger asChild>
         <span
           className={cn(
+            "cursor-pointer",
             !disableUnderline && "underline underline-offset-2",
             className,
           )}
@@ -96,12 +88,11 @@ export const Person: FunctionComponent<PersonProps> = ({
           <div className="flex flex-col items-center">
             <div className="font-semibold text-xl">{a.data.title}</div>
 
-            {a.data.location && (
-              <span className="text-xs text-muted-foreground align-baseline">
-                <MapPinIcon className="size-3 mr-1 inline-block" />
-                {a.data.location}
-              </span>
-            )}
+            <PersonMetadata
+              className="mt-3 justify-center"
+              person={a}
+              size="sm"
+            />
 
             {Object.values(a.data.socials ?? {}).filter(Boolean).length > 0 && (
               <div className="mt-2 w-full flex flex-row items-center justify-center gap-3 text-muted-foreground *:hover:text-foreground transition">
