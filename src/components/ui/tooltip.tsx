@@ -2,9 +2,9 @@
 
 import type { ComponentProps } from "react";
 
-import { cn } from "fumadocs-ui/utils/cn";
-
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
+
+import { cn } from "@/lib/util/cn";
 
 function TooltipProvider({
   delayDuration = 0,
@@ -57,4 +57,4 @@ function TooltipContent({
   );
 }
 
-export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider };
+export { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger };

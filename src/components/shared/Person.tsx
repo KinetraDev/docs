@@ -2,8 +2,6 @@ import type { Route } from "next";
 import Image from "next/image";
 import type { FunctionComponent } from "react";
 
-import { cn } from "fumadocs-ui/utils/cn";
-
 import { GlobeIcon, MapPinIcon } from "lucide-react";
 
 import { type PersonPage, peopleSource } from "@/lib/content";
@@ -19,6 +17,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { cn } from "@/lib/util/cn";
 
 export type PersonProps = {
   personId: string;

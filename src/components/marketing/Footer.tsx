@@ -1,7 +1,6 @@
 import type { Route } from "next";
 import type { CSSProperties, FunctionComponent, ReactNode } from "react";
 
-import { cn } from "fumadocs-ui/utils/cn";
 import type { Folder } from "fumadocs-core/page-tree";
 
 import type { LucideIcon } from "lucide-react";
@@ -16,6 +15,7 @@ import {
 } from "@/components/shared/icons";
 import { LogoText } from "@/components/shared/Logo";
 import { SafeLink } from "@/components/shared/SafeLink";
+import { cn } from "@/lib/util/cn";
 
 type SocialIconProps = {
   href: Route | (string & {});

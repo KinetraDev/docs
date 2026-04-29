@@ -2,9 +2,9 @@
 
 import type { ComponentProps } from "react";
 
-import { cn } from "fumadocs-ui/utils/cn";
-
 import * as HoverCardPrimitive from "@radix-ui/react-hover-card";
+
+import { cn } from "@/lib/util/cn";
 
 function HoverCard({
   ...props
@@ -42,4 +42,4 @@ function HoverCardContent({
   );
 }
 
-export { HoverCard, HoverCardTrigger, HoverCardContent };
+export { HoverCard, HoverCardContent, HoverCardTrigger };

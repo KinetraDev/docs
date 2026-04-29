@@ -1,11 +1,10 @@
 import type { Route } from "next";
 import type { ReactNode } from "react";
 
-import { cn } from "fumadocs-ui/utils/cn";
-
 import { ArrowRightIcon } from "lucide-react";
 
 import { SafeLink } from "@/components/shared/SafeLink";
+import { cn } from "@/lib/util/cn";
 
 export type HeroProps<TMain extends string, TAlt extends string> = {
   titleLine1: ReactNode;

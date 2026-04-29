@@ -1,6 +1,6 @@
 import type { FunctionComponent, ReactNode } from "react";
 
-import { cn } from "fumadocs-ui/utils/cn";
+import { cn } from "@/lib/util/cn";
 
 export type FeatureSectionItemProps = {
   title: ReactNode;

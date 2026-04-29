@@ -8,7 +8,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "fumadocs-ui/components/ui/popover";
-import { cn } from "fumadocs-ui/utils/cn";
 import { useCopyButton } from "fumadocs-ui/utils/use-copy-button";
 
 import {
@@ -19,6 +18,7 @@ import {
 } from "lucide-react";
 
 import { AnthropicClaudeIcon, OpenAiIcon } from "@/components/shared/icons";
+import { cn } from "@/lib/util/cn";
 
 // cache for the duration of the pageload
 const cache = new Map<string, string>();

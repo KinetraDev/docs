@@ -1,6 +1,8 @@
 @import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
+@import "@c15t/nextjs/styles.css";
 @import "tw-animate-css";
 
 @utility min-h-section {

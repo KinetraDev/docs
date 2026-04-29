@@ -1,8 +1,8 @@
 import type { FunctionComponent, SVGProps } from "react";
 
-import { cn } from "fumadocs-ui/utils/cn";
-
 import { SITE_NAME } from "@/config";
+
+import { cn } from "@/lib/util/cn";
 
 export type LogoProps = SVGProps<SVGSVGElement>;
 

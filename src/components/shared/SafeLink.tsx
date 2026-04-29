@@ -5,8 +5,6 @@ import type { Route } from "next";
 import Link, { type LinkProps } from "next/link";
 import type { FunctionComponent, ReactNode } from "react";
 
-import { cn } from "fumadocs-ui/utils/cn";
-
 import { ExternalLinkIcon } from "lucide-react";
 
 import {
@@ -14,6 +12,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/util/cn";
 import { isLinkExternal } from "@/lib/util/helpers";
 
 export type SafeLinkProps = {

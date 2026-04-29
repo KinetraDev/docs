@@ -3,14 +3,15 @@ import type { Route } from "next";
 import type { InferPageType } from "fumadocs-core/source";
 import { loader } from "fumadocs-core/source";
 import { lucideIconsPlugin } from "fumadocs-core/source/lucide-icons";
-import { createMDXSource } from "fumadocs-mdx";
+import { toFumadocsSource } from "fumadocs-mdx/runtime/server";
 
-import { docs, people } from "@/.source";
+import { docs, people } from "collections/server";
 
 const LLM_MDX_SUFFIX = ".md";
 
-export const peopleSource = loader(createMDXSource(people), {
+export const peopleSource = loader({
   baseUrl: "/people",
+  source: toFumadocsSource(people, []),
   plugins: [lucideIconsPlugin()],
 });
 

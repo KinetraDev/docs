@@ -1,17 +1,17 @@
 import { remarkMdxMermaid } from "fumadocs-core/mdx-plugins";
+import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
 import {
   defineCollections,
   defineConfig,
   defineDocs,
-  frontmatterSchema,
-  metaSchema,
 } from "fumadocs-mdx/config";
+import lastModified from "fumadocs-mdx/plugins/last-modified";
 
 import { z } from "zod";
 
 export const docs = defineDocs({
   docs: {
-    schema: frontmatterSchema.extend({
+    schema: pageSchema.extend({
       authors: z.array(z.string()),
       keywords: z.optional(z.array(z.string())),
     }),
@@ -23,7 +23,7 @@ export const docs = defineDocs({
 export const people = defineCollections({
   dir: "content/people",
   type: "doc",
-  schema: frontmatterSchema.extend({
+  schema: pageSchema.extend({
     nickname: z.optional(z.string()),
     picture: z.optional(z.string()),
     location: z.optional(z.string()),
@@ -39,7 +39,7 @@ export const people = defineCollections({
 });
 
 export default defineConfig({
-  lastModifiedTime: "git",
+  plugins: [lastModified()],
   mdxOptions: {
     remarkCodeTabOptions: { parseMdx: true },
     remarkPlugins: [remarkMdxMermaid],

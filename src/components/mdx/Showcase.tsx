@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { cn } from "fumadocs-ui/utils/cn";
+import { cn } from "@/lib/util/cn";
 
 export type ShowcasesProps = {
   cols?: 1 | 2;

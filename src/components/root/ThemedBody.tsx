@@ -3,9 +3,8 @@
 import { useParams } from "next/navigation";
 import type { ReactNode } from "react";
 
-import { cn } from "fumadocs-ui/utils/cn";
-
 import { Providers } from "./Providers";
+import { cn } from "@/lib/util/cn";
 
 export function useDocsAccent(): string | undefined {
   const { slug } = useParams<{ slug?: string[] }>();

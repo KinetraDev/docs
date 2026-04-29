@@ -1,10 +1,10 @@
 import type { FunctionComponent, ReactNode } from "react";
 
 import {
-  ConsentManagerDialog,
+  ConsentBanner,
+  ConsentDialog,
   ConsentManagerProvider,
-  CookieBanner,
-} from "@c15t/nextjs/client";
+} from "@c15t/nextjs";
 import { useTheme } from "next-themes";
 
 export const ConsentProvider: FunctionComponent<{ children: ReactNode }> = ({
@@ -19,15 +19,12 @@ export const ConsentProvider: FunctionComponent<{ children: ReactNode }> = ({
     <ConsentManagerProvider
       options={{
         mode: "offline",
-        react: {
-          colorScheme: resolvedTheme === "dark" ? "dark" : "light",
-          scrollLock: true,
-        },
+        colorScheme: resolvedTheme === "dark" ? "dark" : "light",
         // add scripts here when needed
       }}
     >
-      <CookieBanner />
-      <ConsentManagerDialog />
+      <ConsentBanner />
+      <ConsentDialog />
       {children}
     </ConsentManagerProvider>
   );
