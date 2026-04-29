@@ -28,16 +28,28 @@ graph TD
 
 ## Development
 
-Install `bun`:
+Install [`mise`](https://mise.jdx.dev/):
 ```bash
 # macOS and linux
-curl -fsSL https://bun.sh/install | bash
-
-# windows
-powershell -c "irm bun.sh/install.ps1 | iex"
+curl https://mise.run | sh
 ```
 
-Install dependencies:
+Enable `mise` in your shell, then restart your shell:
+```bash
+# zsh
+echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+
+# bash
+echo 'eval "$(mise activate bash)"' >> ~/.bashrc
+```
+
+Trust this project's `mise.toml` and install the configured tools:
+```bash
+mise trust
+mise install
+```
+
+Install dependencies with the Bun version managed by `mise`:
 ```bash
 bun install
 ```
@@ -45,4 +57,11 @@ bun install
 Start the development server:
 ```bash
 bun dev
+```
+
+Other useful commands:
+```bash
+bun run lint
+bun run format
+bun run build
 ```
