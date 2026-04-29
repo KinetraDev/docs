@@ -10,33 +10,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
-    name: Lint
+  check:
+    name: Check
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
         with:
           fetch-depth: 1 # we don't need the history, just the latest commit - this breaks "last updated" doc pages though!
+
       - name: Setup Bun
         uses: ./.github/actions/setup-bun
+
       - name: Lint
         run: bun run lint
-
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 1 # we don't need the history, just the latest commit - this breaks "last updated" doc pages though!
-
-      - name: Setup Bun
-        uses: ./.github/actions/setup-bun
-
-      - name: Cache Next.js
-        uses: ./.github/actions/cache-nextjs
 
       - name: Build
         run: bun run build
