@@ -1,6 +1,6 @@
-# Aether website and user documentation
+# Kinetra website and user documentation
 
-This is the website and user documentation for the Aether project.
+This is the website and user documentation for the Kinetra project.
 
 ## I just want to contribute to the documentation!
 

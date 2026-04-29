@@ -7,8 +7,8 @@ export default function FundingPage() {
   return (
     <Hero
       titleLine1="Funding"
-      titleLine2="Aether"
-      description="Aether is a motion control platform that allows you to control like you never have before."
+      titleLine2={SITE_NAME}
+      description={`${SITE_NAME} is a motion control platform that allows you to control like you never have before.`}
       mainButtonText="Get started"
       mainButtonHref="/docs/lib"
       altButtonText="I came here for 3D printing"

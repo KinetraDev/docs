@@ -1,6 +1,6 @@
 {
   "root": true,
-  "title": "AetherMCU",
-  "description": "Reference implementation of the Aether components.",
+  "title": "KinetraMCU",
+  "description": "Reference implementation of the Kinetra components.",
   "icon": "Cpu"
 }
