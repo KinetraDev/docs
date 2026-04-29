@@ -40,7 +40,7 @@ jobs:
           NEXT_PUBLIC_PLAUSIBLE_HOST: ${{ secrets.PLAUSIBLE_HOST }}
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           name: github-pages
           path: ./out/
@@ -60,6 +60,6 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
         with:
           artifact_name: github-pages

@@ -19,7 +19,7 @@ runs:
         echo "lock-hash=${lock_hash}" >> "${GITHUB_OUTPUT}"
         echo "source-hash=${source_hash}" >> "${GITHUB_OUTPUT}"
     - name: Cache Next.js build cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: .next/cache
         key: ${{ runner.os }}-next-${{ steps.cache-key.outputs.lock-hash }}-${{ steps.cache-key.outputs.source-hash }}

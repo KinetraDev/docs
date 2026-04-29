@@ -5,7 +5,7 @@ runs:
   using: composite
   steps:
     - name: Setup Tools
-      uses: jdx/mise-action@v3
+      uses: jdx/mise-action@v4
     - name: Install dependencies
       shell: bash
       run: bun install --frozen-lockfile
