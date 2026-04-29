@@ -2,7 +2,7 @@
   "lockfileVersion": 1,
   "workspaces": {
     "": {
-      "name": "aether-website",
+      "name": "kinetra-website",
       "dependencies": {
         "@c15t/nextjs": "1.8.1",
         "@c15t/scripts": "1.0.1",

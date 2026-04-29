@@ -1,6 +1,6 @@
 ---
 title: EtherCAT
-description: Why Aether adopts an EtherCAT communication model for deterministic motion control.
+description: Why Kinetra adopts an EtherCAT communication model for deterministic motion control.
 icon: Network
 authors:
   - Phil
@@ -17,7 +17,7 @@ import { LineSquiggleIcon, SplitIcon, AsteriskIcon, CircleDotIcon } from 'lucide
 
 ![EtherCAT logo](/brands/ethercat.png)
 
-The [EtherCAT](https://en.wikipedia.org/wiki/EtherCAT) protocol is used in Aether because it is a real‑time [fieldbus](https://en.wikipedia.org/wiki/Fieldbus) that runs over standard Ethernet. A single master transmits a frame that passes through every device. Each device reads and writes its data on‑the‑fly at line rate. The frame then returns to the master carrying the updated process data for that cycle.
+The [EtherCAT](https://en.wikipedia.org/wiki/EtherCAT) protocol is used in Kinetra because it is a real‑time [fieldbus](https://en.wikipedia.org/wiki/Fieldbus) that runs over standard Ethernet. A single master transmits a frame that passes through every device. Each device reads and writes its data on‑the‑fly at line rate. The frame then returns to the master carrying the updated process data for that cycle.
 
 EtherCAT supports flexible topologies (line, tree/branch, ring) and typically runs at 100 Mbit/s with deterministic cycle times and low jitter. **Distributed Clocks (DCs)** synchronize all nodes to a single time base so devices act in lock‑step.
 
@@ -27,9 +27,9 @@ Two paths handle data:
 
 This pattern is ideal for multi‑axis motion control: the master commits a schedule, all axes update together, and sensors/encoders are sampled inside the same cycle.
 
-## How Aether Uses It [#how-ethercat-is-implemented]
+## How Kinetra Uses It [#how-ethercat-is-implemented]
 
-Aether treats MCU and I/O nodes like EtherCAT‑style devices. Cycles are deterministic, I/O is register‑mapped, and devices describe themselves with descriptors for discovery, mapping, and safe defaults. This mirrors mature fieldbus practice and keeps the real‑time path clean and predictable: timing‑critical work runs inside the core while higher‑level logic lives on the controller. A single cable can service multiple axes, I/O blocks, and sensors with consistent timing, and both AetherMCU boards and third‑party EtherCAT devices can share the same bus.
+Kinetra treats MCU and I/O nodes like EtherCAT‑style devices. Cycles are deterministic, I/O is register‑mapped, and devices describe themselves with descriptors for discovery, mapping, and safe defaults. This mirrors mature fieldbus practice and keeps the real‑time path clean and predictable: timing‑critical work runs inside the core while higher‑level logic lives on the controller. A single cable can service multiple axes, I/O blocks, and sensors with consistent timing, and both KinetraMCU boards and third‑party EtherCAT devices can share the same bus.
 
 ### Topology & Power
 
@@ -85,9 +85,9 @@ For printers and robotics, that determinism translates into crisp phase alignmen
 ## Frequently Asked Questions [#faq]
 
 <Accordions>
-  <Accordion title="Do I need EtherCAT devices to use Aether?">
-    No. Aether itself is protocol-agnostic and can be used with any other supported connectivity type.
-    EtherCAT is a first‑class citizen of Aether because it is a battle-tested protocol that is used across the industry, with lots of devices available from a variety of vendors. 
+  <Accordion title="Do I need EtherCAT devices to use Kinetra?">
+    No. Kinetra itself is protocol-agnostic and can be used with any other supported connectivity type.
+    EtherCAT is a first‑class citizen of Kinetra because it is a battle-tested protocol that is used across the industry, with lots of devices available from a variety of vendors. 
   </Accordion>
 
   <Accordion title="Why should I choose EtherCAT over other protocols?">

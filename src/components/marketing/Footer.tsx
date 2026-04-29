@@ -7,6 +7,7 @@ import type { Folder } from "fumadocs-core/page-tree";
 import type { LucideIcon } from "lucide-react";
 
 import { docsSource } from "@/lib/content";
+import { DOCS_GITHUB_OWNER, ORG_NAME, SITE_NAME } from "@/config";
 
 import {
   DiscordIcon,
@@ -113,7 +114,7 @@ export const Footer: FunctionComponent<FooterProps> = ({ className }) => {
               />
 
               <SocialIcon
-                href="https://github.com/AetherWareFoundation"
+                href={`https://github.com/${DOCS_GITHUB_OWNER}`}
                 name="GitHub"
                 node={GitHubIcon}
               />
@@ -125,7 +126,7 @@ export const Footer: FunctionComponent<FooterProps> = ({ className }) => {
               <FooterColumnLink href="#">Test</FooterColumnLink>
             </FooterColumn>
 
-            <FooterColumn title="AetherWare Foundation">
+            <FooterColumn title={ORG_NAME}>
               <FooterColumnLink href="#">Test</FooterColumnLink>
             </FooterColumn>
 
@@ -162,7 +163,7 @@ export const Footer: FunctionComponent<FooterProps> = ({ className }) => {
         </div>
 
         <p className="text-xs text-fd-muted-foreground/40">
-          &copy; {new Date().getFullYear()}. AetherWare. All rights reserved.
+          &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
         </p>
       </div>
     </footer>

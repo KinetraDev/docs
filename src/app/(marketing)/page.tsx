@@ -11,7 +11,7 @@ export default function LandingPage() {
         <Hero
           titleLine1="The future of"
           titleLine2="Motion Control"
-          description="Make your robots move with ease. Aether is a motion control platform that allows you to control like you never have before."
+          description="Make your robots move with ease. Kinetra is a motion control platform that allows you to control like you never have before."
           mainButtonText="Get started"
           mainButtonHref="/docs/lib"
           altButtonText="I came here for 3D printing"
