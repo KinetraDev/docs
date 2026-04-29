@@ -1,0 +1,27 @@
+name: Cache Next.js
+description: Restore and save the Next.js build cache.
+
+runs:
+  using: composite
+  steps:
+    - name: Compute cache key
+      id: cache-key
+      shell: bash
+      run: |
+        lock_hash="$(sha256sum bun.lock | cut -d " " -f 1)"
+        source_hash="$(
+          git ls-files -z -- "*.js" "*.jsx" "*.ts" "*.tsx" "*.mdx" "*.css" |
+            xargs -0 -r sha256sum |
+            sha256sum |
+            cut -d " " -f 1
+        )"
+
+        echo "lock-hash=${lock_hash}" >> "${GITHUB_OUTPUT}"
+        echo "source-hash=${source_hash}" >> "${GITHUB_OUTPUT}"
+    - name: Cache Next.js build cache
+      uses: actions/cache@v4
+      with:
+        path: .next/cache
+        key: ${{ runner.os }}-next-${{ steps.cache-key.outputs.lock-hash }}-${{ steps.cache-key.outputs.source-hash }}
+        restore-keys: |
+          ${{ runner.os }}-next-${{ steps.cache-key.outputs.lock-hash }}-

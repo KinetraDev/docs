@@ -3,6 +3,12 @@ name: Deploy
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "README.md"
+      - ".github/**"
+      - "!.github/actions/cache-nextjs/**"
+      - "!.github/actions/setup-bun/**"
+      - "!.github/workflows/deploy.yaml"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -18,17 +24,21 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0 # needed for "last updated" to work for doc pages
-      - name: Setup Tools
-        uses: jdx/mise-action@v3
-      - name: Install dependencies
-        run: bun install
+
+      - name: Setup Bun
+        uses: ./.github/actions/setup-bun
+
       - name: Lint
         run: bun run lint
+      - name: Cache Next.js
+        uses: ./.github/actions/cache-nextjs
+
       - name: Build
         run: bun run build
         env:
           NEXT_PUBLIC_SITE_HOST: ${{ vars.SITE_HOST }}
           NEXT_PUBLIC_PLAUSIBLE_HOST: ${{ secrets.PLAUSIBLE_HOST }}
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
