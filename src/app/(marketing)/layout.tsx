@@ -1,6 +1,6 @@
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 
-import { GITHUB_URL, SITE_NAME } from "@/config";
+import { DOCS_GITHUB_OWNER, SITE_NAME } from "@/config";
 import { linkItems } from "@/config.layout";
 
 import { Footer } from "@/components/marketing/Footer";
@@ -11,7 +11,7 @@ export default function Layout({ children }: LayoutProps<"/">) {
   return (
     <HomeLayout
       nav={{ title: <LogoText /> }}
-      githubUrl={GITHUB_URL}
+      githubUrl={`https://github.com/${DOCS_GITHUB_OWNER}`}
       links={[...linkItems]}
     >
       {children}
