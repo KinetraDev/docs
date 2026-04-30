@@ -6,7 +6,7 @@
 @import "tw-animate-css";
 
 @utility min-h-section {
-  @apply min-h-[calc(100dvh-(var(--spacing)*14)-var(--fd-banner-height))];
+  min-height: calc(100dvh - (var(--spacing) * 14) - var(--fd-banner-height));
 }
 
 @layer base {
@@ -22,7 +22,7 @@
     @apply bg-white;
   }
 
-  /* make selections properlyvisible */
+  /* make selections properly visible */
   *::selection {
     @apply bg-accent! text-accent-foreground!;
   }
