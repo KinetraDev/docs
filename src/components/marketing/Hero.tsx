@@ -6,7 +6,10 @@ import { ArrowRightIcon } from "lucide-react";
 import { SafeLink } from "@/components/shared/SafeLink";
 import { cn } from "@/lib/util/cn";
 
-export type HeroProps<TMain extends string, TAlt extends string> = {
+export type HeroProps<
+  TMain extends string = string,
+  TAlt extends string = string,
+> = {
   titleLine1: ReactNode;
   titleLine2: ReactNode;
   description: ReactNode;
@@ -30,12 +33,12 @@ export function Hero<TMain extends string, TAlt extends string>({
   background,
   className,
   children,
-}: HeroProps<TMain, TAlt>) {
+}: Readonly<HeroProps<TMain, TAlt>>) {
   const getYouTubeVideoId = (url: string): string | null => {
     const regExp =
       /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return match && match[2].length === 11 ? match[2] : null;
+    const match = regExp.exec(url);
+    return match?.[2]?.length === 11 ? match[2] : null;
   };
 
   return (

@@ -1,14 +1,18 @@
+import type { FunctionComponent } from "react";
+
 import type { PersonPage } from "@/lib/content";
 
 import { ContributorCard } from "./ContributorCard";
 
-export function ContributorSection({
-  contributors,
-  siteName,
-}: {
+type ContributorSectionProps = {
   contributors: Array<PersonPage>;
   siteName: string;
-}) {
+};
+
+export const ContributorSection: FunctionComponent<ContributorSectionProps> = ({
+  contributors,
+  siteName,
+}) => {
   return (
     <section className="border-t bg-fd-background px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
@@ -33,4 +37,4 @@ export function ContributorSection({
       </div>
     </section>
   );
-}
+};

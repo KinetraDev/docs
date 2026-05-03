@@ -7,7 +7,11 @@ import {
 } from "@c15t/nextjs";
 import { useTheme } from "next-themes";
 
-export const ConsentProvider: FunctionComponent<{ children: ReactNode }> = ({
+type ConsentProviderProps = {
+  children: ReactNode;
+};
+
+export const ConsentProvider: FunctionComponent<ConsentProviderProps> = ({
   children,
 }) => {
   const { resolvedTheme } = useTheme();

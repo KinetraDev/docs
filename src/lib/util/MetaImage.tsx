@@ -1,3 +1,5 @@
+import type { FunctionComponent } from "react";
+
 import { SITE_NAME } from "@/config";
 
 import { Logo } from "@/components/shared/Logo";
@@ -7,7 +9,10 @@ export type MetaImageProps = {
   description?: string;
 };
 
-export function MetaImage({ title, description }: MetaImageProps) {
+export const MetaImage: FunctionComponent<MetaImageProps> = ({
+  title,
+  description,
+}) => {
   return (
     <div
       style={{
@@ -90,4 +95,4 @@ export function MetaImage({ title, description }: MetaImageProps) {
       />
     </div>
   );
-}
+};

@@ -1,10 +1,18 @@
+import type { FunctionComponent } from "react";
+
 import type { PersonPage } from "@/lib/content";
 
 import { ContributorAvatar } from "./ContributorAvatar";
 import { ContributorSocials } from "./ContributorSocials";
 import { PersonMetadata } from "@/components/shared/PersonMetadata";
 
-export function ContributorCard({ person }: { person: PersonPage }) {
+type ContributorCardProps = {
+  person: PersonPage;
+};
+
+export const ContributorCard: FunctionComponent<ContributorCardProps> = ({
+  person,
+}) => {
   return (
     <article className="group overflow-hidden rounded-3xl border bg-fd-card shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl">
       <div className="bg-linear-to-r from-violet-500/15 via-fuchsia-500/15 to-cyan-500/15 px-6 pt-6 pb-5">
@@ -40,4 +48,4 @@ export function ContributorCard({ person }: { person: PersonPage }) {
       )}
     </article>
   );
-}
+};

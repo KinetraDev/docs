@@ -1,3 +1,5 @@
+import type { FunctionComponent } from "react";
+
 import { cva, type VariantProps } from "class-variance-authority";
 import { MapPinIcon } from "lucide-react";
 
@@ -50,14 +52,16 @@ export type PersonMetadataProps = {
   className?: string;
 } & VariantProps<typeof personMetadataVariants>;
 
-export function PersonMetadata({
+export const PersonMetadata: FunctionComponent<PersonMetadataProps> = ({
   person,
   size,
   className,
-}: PersonMetadataProps) {
-  const { location, roles } = person.data;
+}) => {
+  const { is_maintainer, location, roles } = person.data;
 
-  if (!location && (!roles || roles.length === 0)) return null;
+  if (!is_maintainer && !location && (!roles || roles.length === 0)) {
+    return null;
+  }
 
   return (
     <div className={cn(personMetadataVariants({ size }), className)}>
@@ -68,9 +72,11 @@ export function PersonMetadata({
         </p>
       )}
 
+      {is_maintainer && <PersonRoleBadge label="Maintainer" size={size} />}
+
       {roles?.map((role) => (
         <PersonRoleBadge key={role} label={role} size={size} />
       ))}
     </div>
   );
-}
+};

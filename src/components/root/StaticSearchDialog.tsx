@@ -1,5 +1,7 @@
 "use client";
 
+import type { FunctionComponent } from "react";
+
 import {
   SearchDialog,
   SearchDialogClose,
@@ -23,7 +25,11 @@ function initOrama() {
   });
 }
 
-export function StaticSearchDialog(props: SharedProps) {
+type StaticSearchDialogProps = SharedProps;
+
+export const StaticSearchDialog: FunctionComponent<StaticSearchDialogProps> = (
+  props,
+) => {
   const { locale } = useI18n();
   const { search, setSearch, query } = useDocsSearch({
     type: "static",
@@ -51,4 +57,4 @@ export function StaticSearchDialog(props: SharedProps) {
       </SearchDialogContent>
     </SearchDialog>
   );
-}
+};

@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import type { ReactNode } from "react";
+import type { FunctionComponent, ReactNode } from "react";
 
 import { Providers } from "./Providers";
 import { cn } from "@/lib/util/cn";
@@ -11,7 +11,13 @@ export function useDocsAccent(): string | undefined {
   return Array.isArray(slug) && slug.length > 0 ? slug[0] : undefined;
 }
 
-export function ThemedBody({ children }: { children: ReactNode }) {
+type ThemedBodyProps = {
+  children: ReactNode;
+};
+
+export const ThemedBody: FunctionComponent<ThemedBodyProps> = ({
+  children,
+}) => {
   const mode = useDocsAccent();
 
   return (
@@ -24,4 +30,4 @@ export function ThemedBody({ children }: { children: ReactNode }) {
       <Providers>{children}</Providers>
     </body>
   );
-}
+};

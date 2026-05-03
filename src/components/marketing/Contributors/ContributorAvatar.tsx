@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { FunctionComponent } from "react";
 
 import type { PersonPage } from "@/lib/content";
 
@@ -16,13 +17,15 @@ function contributorMeta(person: PersonPage): {
   return { initials, color };
 }
 
-export function ContributorAvatar({
-  person,
-  className = "size-24",
-}: {
+type ContributorAvatarProps = {
   person: PersonPage;
   className?: string;
-}) {
+};
+
+export const ContributorAvatar: FunctionComponent<ContributorAvatarProps> = ({
+  person,
+  className = "size-24",
+}) => {
   const { initials, color } = contributorMeta(person);
 
   if (person.data.picture) {
@@ -47,4 +50,4 @@ export function ContributorAvatar({
       </span>
     </div>
   );
-}
+};

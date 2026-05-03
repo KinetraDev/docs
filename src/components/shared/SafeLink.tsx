@@ -23,6 +23,10 @@ export type SafeLinkProps = {
   disableTooltip?: boolean;
 } & LinkProps<Route>;
 
+type WrapperProps = {
+  children: ReactNode;
+};
+
 export const SafeLink: FunctionComponent<SafeLinkProps> = ({
   // LinkProps
   href,
@@ -43,7 +47,7 @@ export const SafeLink: FunctionComponent<SafeLinkProps> = ({
       ? `${rel} ${rel?.includes("noreferrer") ? "" : "noreferrer "}${rel?.includes("noopener") ? "" : "noopener"}`
       : rel;
 
-  const Wrapper = ({ children }: { children: ReactNode }) =>
+  const Wrapper: FunctionComponent<WrapperProps> = ({ children }) =>
     isExternal && !disableTooltip ? (
       <Tooltip>
         <TooltipTrigger asChild>{children}</TooltipTrigger>

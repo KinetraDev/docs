@@ -1,4 +1,5 @@
 import type { Route } from "next";
+import type { FunctionComponent } from "react";
 
 import { GlobeIcon } from "lucide-react";
 
@@ -11,7 +12,13 @@ import {
 } from "@/components/shared/icons";
 import { SafeLink } from "@/components/shared/SafeLink";
 
-export function ContributorSocials({ person }: { person: PersonPage }) {
+type ContributorSocialsProps = {
+  person: PersonPage;
+};
+
+export const ContributorSocials: FunctionComponent<ContributorSocialsProps> = ({
+  person,
+}) => {
   const { socials } = person.data;
 
   if (!socials || Object.values(socials).filter(Boolean).length === 0) {
@@ -66,4 +73,4 @@ export function ContributorSocials({ person }: { person: PersonPage }) {
       )}
     </div>
   );
-}
+};

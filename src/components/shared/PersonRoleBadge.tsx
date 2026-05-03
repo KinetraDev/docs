@@ -1,3 +1,5 @@
+import type { FunctionComponent } from "react";
+
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/util/cn";
@@ -35,11 +37,11 @@ export type PersonRoleBadgeProps = {
   className?: string;
 } & VariantProps<typeof personRoleBadgeVariants>;
 
-export function PersonRoleBadge({
+export const PersonRoleBadge: FunctionComponent<PersonRoleBadgeProps> = ({
   label,
   size,
   className,
-}: PersonRoleBadgeProps) {
+}) => {
   const hue = computeStringHue(label);
 
   return (
@@ -57,4 +59,4 @@ export function PersonRoleBadge({
       {label}
     </span>
   );
-}
+};

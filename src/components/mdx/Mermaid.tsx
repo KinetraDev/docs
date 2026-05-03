@@ -19,7 +19,11 @@ function cachePromise<T>(
   return promise;
 }
 
-function MermaidContent({ chart }: { chart: string }) {
+type MermaidContentProps = {
+  chart: string;
+};
+
+const MermaidContent: FunctionComponent<MermaidContentProps> = ({ chart }) => {
   const id = useId();
   const { resolvedTheme, systemTheme, theme } = useTheme();
   const { default: mermaid } = use(
@@ -61,9 +65,13 @@ function MermaidContent({ chart }: { chart: string }) {
       dangerouslySetInnerHTML={{ __html: svg }}
     />
   );
-}
+};
 
-export const Mermaid: FunctionComponent<{ chart: string }> = ({ chart }) => {
+type MermaidProps = {
+  chart: string;
+};
+
+export const Mermaid: FunctionComponent<MermaidProps> = ({ chart }) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {

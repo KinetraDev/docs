@@ -1,14 +1,18 @@
+import type { FunctionComponent } from "react";
+
 import { SparklesIcon, UsersRoundIcon } from "lucide-react";
 
 import type { PersonPage } from "@/lib/content";
 
 import { ContributorAvatar } from "./ContributorAvatar";
 
-export function ContributorAvatarSummary({
-  contributors,
-}: {
+type ContributorAvatarSummaryProps = {
   contributors: Array<PersonPage>;
-}) {
+};
+
+export const ContributorAvatarSummary: FunctionComponent<
+  ContributorAvatarSummaryProps
+> = ({ contributors }) => {
   return (
     <div className="relative w-full max-w-sm">
       <div className="absolute -top-8 right-8 h-24 w-24 rounded-full bg-cyan-300/30 blur-3xl" />
@@ -45,4 +49,4 @@ export function ContributorAvatarSummary({
       </div>
     </div>
   );
-}
+};

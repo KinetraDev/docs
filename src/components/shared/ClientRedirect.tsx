@@ -1,10 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+import { type FunctionComponent, useEffect } from "react";
 
-export function ClientRedirect({ href }: { href: string }) {
+type ClientRedirectProps = {
+  href: string;
+};
+
+export const ClientRedirect: FunctionComponent<ClientRedirectProps> = ({
+  href,
+}) => {
   useEffect(() => {
-    window.location.href = href;
+    globalThis.location.href = href;
   }, [href]);
   return null;
-}
+};

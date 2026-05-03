@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { type FunctionComponent, useMemo, useState } from "react";
 
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import {
@@ -23,7 +23,13 @@ import { cn } from "@/lib/util/cn";
 // cache for the duration of the pageload
 const cache = new Map<string, string>();
 
-export function CopyMarkdownButton({ markdownUrl }: { markdownUrl: string }) {
+type CopyMarkdownButtonProps = {
+  markdownUrl: string;
+};
+
+export const CopyMarkdownButton: FunctionComponent<CopyMarkdownButtonProps> = ({
+  markdownUrl,
+}) => {
   const [isLoading, setLoading] = useState(false);
   const [checked, onClick] = useCopyButton(async () => {
     const cached = cache.get(markdownUrl);
@@ -67,9 +73,15 @@ export function CopyMarkdownButton({ markdownUrl }: { markdownUrl: string }) {
       Copy Markdown
     </button>
   );
-}
+};
 
-export function AiActions({ markdownUrl }: { markdownUrl: string }) {
+type AiActionsProps = {
+  markdownUrl: string;
+};
+
+export const AiActions: FunctionComponent<AiActionsProps> = ({
+  markdownUrl,
+}) => {
   const resolvedMarkdownUrl = useMemo(() => {
     if (typeof window === "undefined") return "Loading...";
     const url = new URL(
@@ -133,4 +145,4 @@ export function AiActions({ markdownUrl }: { markdownUrl: string }) {
       </PopoverContent>
     </Popover>
   );
-}
+};

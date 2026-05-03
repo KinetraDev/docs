@@ -15,11 +15,14 @@ import {
 
 export type LucideIconName = keyof typeof icons;
 
-export const DynamicLucideIcon: FunctionComponent<
-  {
-    icon: LucideIconName | (string & {});
-  } & SVGProps<SVGSVGElement>
-> = ({ icon, ...props }) => {
+export type DynamicLucideIconProps = {
+  icon: LucideIconName | (string & {});
+} & SVGProps<SVGSVGElement>;
+
+export const DynamicLucideIcon: FunctionComponent<DynamicLucideIconProps> = ({
+  icon,
+  ...props
+}) => {
   const Icon = icons[icon as LucideIconName];
   if (!icon) return null;
 
