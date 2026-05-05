@@ -25,7 +25,6 @@ export const people = defineCollections({
   type: "doc",
   schema: pageSchema.extend({
     nickname: z.optional(z.string()),
-    is_maintainer: z.optional(z.boolean()),
     roles: z.optional(z.array(z.string())),
     picture: z.optional(z.string()),
     location: z.optional(z.string()),

@@ -1,4 +1,4 @@
-import { peopleSource } from "@/lib/content";
+import { OPersonRole, peopleSource, personHasRole } from "@/lib/content";
 import { SITE_NAME } from "@/config";
 
 import { ContributorAvatarSummary } from "@/components/marketing/Contributors/ContributorAvatarSummary";
@@ -6,11 +6,15 @@ import { ContributorSection } from "@/components/marketing/Contributors/Contribu
 import { Hero } from "@/components/marketing/Hero";
 import { metadataGenerator } from "@/lib/util/metadata";
 
-export default function AboutPage() {
-  const contributors = peopleSource
-    .getPages()
-    .sort((a, b) => a.data.title.localeCompare(b.data.title));
+const CONTRIBUTORS_SORTED = peopleSource.getPages().sort((a, b) => {
+  const maintainerSort =
+    Number(personHasRole(b, OPersonRole.MAINTAINER)) -
+    Number(personHasRole(a, OPersonRole.MAINTAINER));
+  if (maintainerSort !== 0) return maintainerSort;
+  return a.data.title.localeCompare(b.data.title);
+});
 
+export default function AboutPage() {
   return (
     <main className="flex flex-col">
       <section className="min-h-section flex">
@@ -25,11 +29,14 @@ export default function AboutPage() {
           background={{ from: "#fc6ff7", to: "#fc6ff7" }}
           className="flex-1"
         >
-          <ContributorAvatarSummary contributors={contributors} />
+          <ContributorAvatarSummary contributors={CONTRIBUTORS_SORTED} />
         </Hero>
       </section>
 
-      <ContributorSection contributors={contributors} siteName={SITE_NAME} />
+      <ContributorSection
+        contributors={CONTRIBUTORS_SORTED}
+        siteName={SITE_NAME}
+      />
     </main>
   );
 }

@@ -57,9 +57,9 @@ export const PersonMetadata: FunctionComponent<PersonMetadataProps> = ({
   size,
   className,
 }) => {
-  const { is_maintainer, location, roles } = person.data;
+  const { location, roles } = person.data;
 
-  if (!is_maintainer && !location && (!roles || roles.length === 0)) {
+  if (!location && (!roles || roles.length === 0)) {
     return null;
   }
 
@@ -71,8 +71,6 @@ export const PersonMetadata: FunctionComponent<PersonMetadataProps> = ({
           {location}
         </p>
       )}
-
-      {is_maintainer && <PersonRoleBadge label="Maintainer" size={size} />}
 
       {roles?.map((role) => (
         <PersonRoleBadge key={role} label={role} size={size} />

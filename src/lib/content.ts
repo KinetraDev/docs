@@ -54,3 +54,20 @@ export async function getDocsLLMText(page: DocsPage) {
   const processed = await page.data.getText("processed");
   return `# ${page.data.title} (${page.url})\n\n${processed}`;
 }
+
+export const OPersonRole = {
+  MAINTAINER: "maintainer",
+  DOCUMENTATION: "documentation",
+  COMMUNITY: "community",
+  UI_UX: "ui & ux",
+} as const;
+
+type PersonRole = (typeof OPersonRole)[keyof typeof OPersonRole];
+
+export function personHasRole(person: PersonPage, role: PersonRole): boolean {
+  return (
+    person.data.roles
+      ?.map((role) => role.trim().toLowerCase())
+      .includes(role) ?? false
+  );
+}
