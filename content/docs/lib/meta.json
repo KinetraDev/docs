@@ -1,7 +1,0 @@
-{
-  "root": true,
-  "title": "Kinetra",
-  "description": "The Kinetra framework for building motion control applications in Rust.",
-  "icon": "BatteryCharging",
-  "pages": ["index", "faq", "--- Connectivity ---", "ethercat"]
-}

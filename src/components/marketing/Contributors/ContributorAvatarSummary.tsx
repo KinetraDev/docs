@@ -1,10 +1,11 @@
-import type { FunctionComponent } from "react";
+import { useMemo, type FunctionComponent } from "react";
 
 import { SparklesIcon, UsersRoundIcon } from "lucide-react";
 
 import type { PersonPage } from "@/lib/content";
 
 import { ContributorAvatar } from "./ContributorAvatar";
+import { cn } from "@/lib/util/cn";
 
 type ContributorAvatarSummaryProps = {
   contributors: Array<PersonPage>;
@@ -13,6 +14,15 @@ type ContributorAvatarSummaryProps = {
 export const ContributorAvatarSummary: FunctionComponent<
   ContributorAvatarSummaryProps
 > = ({ contributors }) => {
+    const contributorCount = useMemo(() => {
+      const c = contributors.length;
+      if(c <= 3)
+        return 'space-x-4';
+      if(c <= 6)
+        return '-space-x-4';
+      return '-space-x-8';
+    }, [contributors.length]);
+
   return (
     <div className="relative w-full max-w-sm">
       <div className="absolute -top-8 right-8 h-24 w-24 rounded-full bg-cyan-300/30 blur-3xl" />
@@ -30,14 +40,24 @@ export const ContributorAvatarSummary: FunctionComponent<
           </div>
         </div>
 
-        <div className="mt-8 flex -space-x-4">
-          {contributors.slice(0, 4).map((person) => (
-            <ContributorAvatar
-              key={person.url}
-              person={person}
-              className="size-16"
-            />
-          ))}
+        <div
+          className="mt-2 -mb-6 overflow-hidden py-6"
+          style={{
+            maskImage:
+              "linear-gradient(to right, black 0%, black 40%, transparent 90%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, black 0%, black 40%, transparent 90%)",
+          }}
+        >
+          <div className={cn("flex w-max", contributorCount)}>
+            {contributors.map((person) => (
+              <ContributorAvatar
+                key={person.url}
+                person={person}
+                className="size-16 shrink-0"
+              />
+            ))}
+          </div>
         </div>
 
         <div className="mt-8 rounded-2xl border border-white/10 bg-black/15 p-4">

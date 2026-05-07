@@ -1,0 +1,7 @@
+{
+  "root": true,
+  "title": "Introduction",
+  "description": "Overview of the Kinetra framework and where to go next.",
+  "icon": "Compass",
+  "pages": ["index", "faq", "--- Connectivity ---", "ethercat"]
+}

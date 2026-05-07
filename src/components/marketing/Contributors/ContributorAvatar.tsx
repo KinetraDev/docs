@@ -4,6 +4,7 @@ import type { FunctionComponent } from "react";
 import type { PersonPage } from "@/lib/content";
 
 import { computeInitials, computeStringHue } from "@/lib/util/helpers";
+import { cn } from "@/lib/util/cn";
 
 function contributorMeta(person: PersonPage): {
   initials: string;
@@ -26,14 +27,18 @@ export const ContributorAvatar: FunctionComponent<ContributorAvatarProps> = ({
   person,
   className = "size-24",
 }) => {
+  const{picture, title} = person.data;  
   const { initials, color } = contributorMeta(person);
 
-  if (person.data.picture) {
+  if (picture) {
     return (
       <Image
-        className={`${className} rounded-full border-4 border-white/70 object-cover shadow-xl shadow-black/20`}
-        src={person.data.picture}
-        alt={`${person.data.title} avatar`}
+        className={cn(
+          "rounded-full border-4 border-white/70 object-cover shadow-md shadow-black/15",
+          className,
+        )}
+        src={picture}
+        alt={`${title} avatar`}
         width={160}
         height={160}
       />
@@ -42,7 +47,10 @@ export const ContributorAvatar: FunctionComponent<ContributorAvatarProps> = ({
 
   return (
     <div
-      className={`${className} flex items-center justify-center rounded-full border-4 border-white/70 shadow-xl shadow-black/20`}
+      className={cn(
+        "flex items-center justify-center rounded-full border-4 border-white/70 shadow-md shadow-black/15",
+        className,
+      )}
       style={{ backgroundColor: color }}
     >
       <span className="text-2xl font-bold tracking-wide text-white">

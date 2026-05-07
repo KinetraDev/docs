@@ -11,7 +11,7 @@ export const linkItems: Array<LinkItemType> = [
   {
     icon: <FileTextIcon />,
     text: "Documentation",
-    url: "/docs/lib",
+    url: "/docs",
   },
   {
     icon: <HandshakeIcon />,

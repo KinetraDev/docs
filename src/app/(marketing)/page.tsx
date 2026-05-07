@@ -1,3 +1,5 @@
+import type { Route } from "next";
+
 import {
   FeatureSection,
   FeatureSectionItem,
@@ -13,7 +15,7 @@ export default function LandingPage() {
           titleLine2="Motion Control"
           description="Make your robots move with ease. Kinetra is a motion control platform that allows you to control like you never have before."
           mainButtonText="Get started"
-          mainButtonHref="/docs/lib"
+          mainButtonHref={"/docs" as Route}
           altButtonText="I came here for 3D printing"
           altButtonHref="/docs/printer"
           background={{ from: "#fc6ff7", to: "#fc6ff7" }}

@@ -1,3 +1,5 @@
+import type { Route } from "next";
+
 import { OPersonRole, peopleSource, personHasRole } from "@/lib/content";
 import { SITE_NAME } from "@/config";
 
@@ -23,7 +25,7 @@ export default function AboutPage() {
           titleLine2={SITE_NAME}
           description={`${SITE_NAME} is a motion control platform shaped by builders who care about approachable, precise motion control.`}
           mainButtonText="Get started"
-          mainButtonHref="/docs/lib"
+          mainButtonHref={"/docs" as Route}
           altButtonText="I came here for 3D printing"
           altButtonHref="/docs/printer"
           background={{ from: "#fc6ff7", to: "#fc6ff7" }}

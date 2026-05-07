@@ -1,7 +1,7 @@
 import path from "node:path";
 
 import type { Metadata, Route } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { type ComponentPropsWithoutRef, Fragment } from "react";
 
 import {
@@ -30,6 +30,8 @@ import { metadataGenerator } from "@/lib/util/metadata";
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
   const params = await props.params;
+  if (!params.slug || params.slug.length === 0) redirect("/docs/intro");
+
   const page = docsSource.getPage(params.slug);
   if (!page) notFound();
 
@@ -112,13 +114,14 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 }
 
 export async function generateStaticParams() {
-  return docsSource.generateParams();
+  return [{ slug: [] }, ...docsSource.generateParams()];
 }
 
 export async function generateMetadata(
   props: PageProps<"/docs/[[...slug]]">,
 ): Promise<Metadata> {
   const { slug } = await props.params;
+  if (!slug || slug.length === 0) return {};
 
   const page = docsSource.getPage(slug);
   if (!page) notFound();

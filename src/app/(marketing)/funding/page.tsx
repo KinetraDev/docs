@@ -1,3 +1,5 @@
+import type { Route } from "next";
+
 import { SITE_NAME } from "@/config";
 
 import { Hero } from "@/components/marketing/Hero";
@@ -10,7 +12,7 @@ export default function FundingPage() {
       titleLine2={SITE_NAME}
       description={`${SITE_NAME} is a motion control platform that allows you to control like you never have before.`}
       mainButtonText="Get started"
-      mainButtonHref="/docs/lib"
+      mainButtonHref={"/docs" as Route}
       altButtonText="I came here for 3D printing"
       altButtonHref="/docs/printer"
       background={{ from: "#fc6ff7", to: "#fc6ff7" }}
