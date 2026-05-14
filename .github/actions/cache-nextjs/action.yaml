@@ -8,7 +8,7 @@ runs:
       id: cache-key
       shell: bash
       run: |
-        lock_hash="$(sha256sum bun.lock | cut -d " " -f 1)"
+        lock_hash="$(sha256sum pnpm-lock.yaml | cut -d " " -f 1)"
         source_hash="$(
           git ls-files -z -- "*.js" "*.jsx" "*.ts" "*.tsx" "*.mdx" "*.css" |
             xargs -0 -r sha256sum |
