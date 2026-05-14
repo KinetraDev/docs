@@ -19,11 +19,11 @@ jobs:
         with:
           fetch-depth: 1 # we don't need the history, just the latest commit - this breaks "last updated" doc pages though!
 
-      - name: Setup Bun
-        uses: ./.github/actions/setup-bun
+      - name: Setup Toolchain
+        uses: ./.github/actions/setup-toolchain
 
       - name: Lint
-        run: bun run lint
+        run: pnpm run lint
 
       - name: Build
-        run: bun run build
+        run: pnpm run build

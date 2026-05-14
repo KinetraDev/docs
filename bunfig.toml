@@ -1,4 +1,0 @@
-preload = ["./scripts/fuma-mdx-preload.ts"]
-
-[install]
-exact = false
