@@ -1,5 +1,5 @@
-name: Setup Bun
-description: Set up Bun via mise and install dependencies.
+name: Setup Toolchain
+description: Set up the toolchain via mise and install dependencies.
 
 runs:
   using: composite
@@ -8,4 +8,4 @@ runs:
       uses: jdx/mise-action@v4
     - name: Install dependencies
       shell: bash
-      run: bun install --frozen-lockfile
+      run: pnpm install --frozen-lockfile

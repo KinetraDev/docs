@@ -7,7 +7,7 @@ on:
       - "README.md"
       - ".github/**"
       - "!.github/actions/cache-nextjs/**"
-      - "!.github/actions/setup-bun/**"
+      - "!.github/actions/setup-toolchain/**"
       - "!.github/workflows/deploy.yaml"
 
 concurrency:
@@ -25,16 +25,17 @@ jobs:
         with:
           fetch-depth: 0 # needed for "last updated" to work for doc pages
 
-      - name: Setup Bun
-        uses: ./.github/actions/setup-bun
+      - name: Setup Toolchain
+        uses: ./.github/actions/setup-toolchain
 
       - name: Lint
-        run: bun run lint
+        run: pnpm run lint
+
       - name: Cache Next.js
         uses: ./.github/actions/cache-nextjs
 
       - name: Build
-        run: bun run build
+        run: pnpm run build
         env:
           NEXT_PUBLIC_SITE_HOST: ${{ vars.SITE_HOST }}
           NEXT_PUBLIC_PLAUSIBLE_HOST: ${{ secrets.PLAUSIBLE_HOST }}
