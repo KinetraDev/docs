@@ -41,7 +41,7 @@ export const LogoText: FunctionComponent<LogoTextProps> = ({
       <Logo className={cn("size-6", logoClassName)} />
       <span
         className={cn(
-          "text-lg font-bold spacing tracking-[0.2rem]",
+          "text-lg font-bold font-display spacing tracking-[0.2rem]",
           textClassName,
         )}
       >

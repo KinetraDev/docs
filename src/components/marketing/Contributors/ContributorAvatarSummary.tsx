@@ -14,14 +14,12 @@ type ContributorAvatarSummaryProps = {
 export const ContributorAvatarSummary: FunctionComponent<
   ContributorAvatarSummaryProps
 > = ({ contributors }) => {
-    const contributorCount = useMemo(() => {
-      const c = contributors.length;
-      if(c <= 3)
-        return 'space-x-4';
-      if(c <= 6)
-        return '-space-x-4';
-      return '-space-x-8';
-    }, [contributors.length]);
+  const contributorCount = useMemo(() => {
+    const c = contributors.length;
+    if (c <= 3) return "space-x-4";
+    if (c <= 6) return "-space-x-4";
+    return "-space-x-8";
+  }, [contributors.length]);
 
   return (
     <div className="relative w-full max-w-sm">

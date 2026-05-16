@@ -27,7 +27,7 @@ export const ContributorAvatar: FunctionComponent<ContributorAvatarProps> = ({
   person,
   className = "size-24",
 }) => {
-  const{picture, title} = person.data;  
+  const { picture, title } = person.data;
   const { initials, color } = contributorMeta(person);
 
   if (picture) {
