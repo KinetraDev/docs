@@ -1,4 +1,4 @@
-import { useMemo, type FunctionComponent } from "react";
+import { type FunctionComponent, useMemo } from "react";
 
 import { SparklesIcon, UsersRoundIcon } from "lucide-react";
 

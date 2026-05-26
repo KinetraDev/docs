@@ -8,6 +8,7 @@
     "build": "next build",
     "dev": "next dev --turbo",
     "lint": "biome check",
+    "fix": "biome check --fix",
     "format": "biome format --write",
     "reset": "rimraf node_modules .next out .source"
   },

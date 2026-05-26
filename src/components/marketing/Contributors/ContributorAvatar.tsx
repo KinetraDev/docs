@@ -3,8 +3,8 @@ import type { FunctionComponent } from "react";
 
 import type { PersonPage } from "@/lib/content";
 
-import { computeInitials, computeStringHue } from "@/lib/util/helpers";
 import { cn } from "@/lib/util/cn";
+import { computeInitials, computeStringHue } from "@/lib/util/helpers";
 
 function contributorMeta(person: PersonPage): {
   initials: string;
