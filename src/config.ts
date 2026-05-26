@@ -1,7 +1,7 @@
 export const SITE_NAME = "Kinetra";
 export const ORG_NAME = "Kinetra Foundation";
 
-export const DISCORD_URL = "https://discord.gg/kinetra";
+export const DISCORD_URL = process.env.NEXT_PUBLIC_DISCORD_INVITE_URL || "#";
 
 export const DOCS_GITHUB_OWNER = "KinetraDev";
 export const DOCS_GITHUB_REPO = "docs";

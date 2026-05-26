@@ -38,6 +38,7 @@ jobs:
         run: pnpm run build
         env:
           NEXT_PUBLIC_SITE_HOST: ${{ vars.SITE_HOST }}
+          NEXT_PUBLIC_DISCORD_INVITE_URL: ${{ secrets.DISCORD_INVITE_URL }}
           NEXT_PUBLIC_PLAUSIBLE_HOST: ${{ secrets.PLAUSIBLE_HOST }}
 
       - name: Upload artifact
