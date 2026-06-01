@@ -1,11 +1,14 @@
 import type { Route } from "next";
 
+import type { Folder, Item, Node, Root } from "fumadocs-core/page-tree";
 import type { InferPageType } from "fumadocs-core/source";
 import { loader } from "fumadocs-core/source";
 import { lucideIconsPlugin } from "fumadocs-core/source/lucide-icons";
 import { toFumadocsSource } from "fumadocs-mdx/runtime/server";
 
 import { docs, people } from "collections/server";
+
+import type { RustdocSourceConfig } from "@/lib/rustdoc/rustdoc";
 
 const LLM_MDX_SUFFIX = ".md";
 
@@ -24,6 +27,65 @@ export const docsSource = loader({
 });
 
 export type DocsPage = InferPageType<typeof docsSource>;
+
+export const RUSTDOC_SOURCES: Array<RustdocSourceConfig> =
+  docsSource.pageTree.children.flatMap((node) => {
+    if (node.type !== "folder" || !node.root) return [];
+
+    const meta = docsSource.getNodeMeta(node);
+    const rustdoc = meta?.data.rustdoc;
+    if (!meta || !rustdoc) return [];
+
+    return [
+      {
+        slug: meta.path.split("/")[0],
+        url: rustdoc.url,
+      },
+    ];
+  });
+
+export function mergeTrees(staticTree: Root, children: Node[]): Root {
+  return {
+    ...staticTree,
+    children: [...staticTree.children, ...children],
+  };
+}
+
+export function getSerializableDocsPageTree(): Root {
+  return serializeRoot(docsSource.pageTree);
+}
+
+function serializeRoot(root: Root): Root {
+  return {
+    ...root,
+    children: root.children.map(serializeNode),
+    fallback: root.fallback ? serializeRoot(root.fallback) : undefined,
+  };
+}
+
+function serializeNode(node: Node): Node {
+  if (node.type === "folder") {
+    const meta = docsSource.getNodeMeta(node as Folder);
+
+    return {
+      ...node,
+      icon: meta?.data.icon,
+      index: node.index ? (serializeNode(node.index) as Item) : undefined,
+      children: node.children.map(serializeNode),
+    };
+  }
+
+  if (node.type === "page") {
+    const page = docsSource.getNodePage(node as Item);
+
+    return {
+      ...node,
+      icon: page?.data.icon,
+    };
+  }
+
+  return { ...node };
+}
 
 export function getDocsMdxPath(page: DocsPage): Route<`/docs-llm/${string}`> {
   return `/docs-llm/${page.slugs.join("/")}${LLM_MDX_SUFFIX}`;
