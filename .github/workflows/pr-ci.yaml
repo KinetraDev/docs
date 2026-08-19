@@ -2,7 +2,7 @@ name: PR continuous integration
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, ready_for_review]
     branches: [main]
 
 concurrency:
@@ -31,6 +31,7 @@ jobs:
   smoke:
     name: Smoke tests
     runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -39,6 +40,9 @@ jobs:
 
       - name: Setup Toolchain
         uses: ./.github/actions/setup-toolchain
+
+      - name: Type-check Playwright config and tests
+        run: pnpm run typecheck:e2e
 
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium
