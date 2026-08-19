@@ -10,6 +10,8 @@
     "lint": "biome check",
     "fix": "biome check --fix",
     "format": "biome format --write",
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.e2e.json",
+    "typecheck:e2e": "tsc -p tsconfig.e2e.json",
     "test:e2e": "playwright test",
     "reset": "rimraf node_modules .next out .source"
   },
