@@ -10,6 +10,8 @@
     "lint": "biome check",
     "fix": "biome check --fix",
     "format": "biome format --write",
+    "typecheck": "tsc --noEmit",
+    "test:e2e": "playwright test",
     "reset": "rimraf node_modules .next out .source"
   },
   "browserslist": {
@@ -52,9 +54,10 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.13",
+    "@playwright/test": "1.62.1",
     "@tailwindcss/postcss": "4.2.4",
-    "@types/node": "24.12.3",
     "@types/mdx": "2.0.13",
+    "@types/node": "24.12.3",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "postcss": "8.5.12",
