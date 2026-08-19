@@ -1,0 +1,11 @@
+{
+  "name": "Kinetra docs",
+  "install": "if [ ! -x \"$HOME/.local/bin/mise\" ] && ! command -v mise >/dev/null 2>&1; then curl -fsSL https://mise.run | sh; fi; export PATH=\"$HOME/.local/bin:$PATH\"; grep -q 'mise activate bash' \"$HOME/.bashrc\" 2>/dev/null || echo 'eval \"$(~/.local/bin/mise activate bash)\"' >> \"$HOME/.bashrc\"; mise trust && mise install && eval \"$(mise activate bash --shims)\" && corepack enable && pnpm install --frozen-lockfile",
+  "terminals": [
+    {
+      "name": "dev",
+      "command": "eval \"$(~/.local/bin/mise activate bash --shims)\" && pnpm dev"
+    }
+  ],
+  "ports": [{ "name": "dev server", "port": 3000 }]
+}
