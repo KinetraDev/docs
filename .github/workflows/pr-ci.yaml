@@ -28,6 +28,12 @@ jobs:
       - name: Build
         run: pnpm run build
 
+      # Runs after Build so Next's generated types (next-env.d.ts, .next/types)
+      # exist. Covers app code, the Playwright config, and the tests via the
+      # single tsconfig.json.
+      - name: Type check
+        run: pnpm run typecheck
+
   smoke:
     name: Smoke tests
     runs-on: ubuntu-latest
@@ -40,9 +46,6 @@ jobs:
 
       - name: Setup Toolchain
         uses: ./.github/actions/setup-toolchain
-
-      - name: Type-check Playwright config and tests
-        run: pnpm run typecheck:e2e
 
       - name: Install Playwright browsers
         run: pnpm exec playwright install --with-deps chromium
