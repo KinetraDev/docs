@@ -17,7 +17,15 @@ export const docs = defineDocs({
     }),
     postprocess: { includeProcessedMarkdown: true },
   },
-  meta: { schema: metaSchema },
+  meta: {
+    schema: metaSchema.extend({
+      rustdoc: z
+        .object({
+          url: z.string(),
+        })
+        .optional(),
+    }),
+  },
 });
 
 export const people = defineCollections({

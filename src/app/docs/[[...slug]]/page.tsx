@@ -14,7 +14,7 @@ import {
 
 import { DotIcon } from "lucide-react";
 
-import { docsSource, getDocsMdxPath } from "@/lib/content";
+import { docsSource, getDocsMdxPath, RUSTDOC_SOURCES } from "@/lib/content";
 import {
   DOCS_GITHUB_BRANCH,
   DOCS_GITHUB_OWNER,
@@ -24,13 +24,25 @@ import { getMDXComponents } from "@/mdx-components";
 
 import { AiActions, CopyMarkdownButton } from "@/components/docs/PageActions";
 import { PageLink } from "@/components/docs/PageLink";
+import { RustdocPage } from "@/components/docs/rustdoc/RustdocPage";
 import { Person } from "@/components/shared/Person";
 import { SafeLink } from "@/components/shared/SafeLink";
+import { normalizeRustdocJson } from "@/lib/rustdoc/normalize-rustdoc-json";
+import {
+  getRustdocPageSlug,
+  getRustdocSourceForSlug,
+  getRustdocSourceSlugPrefix,
+  type RustdocSourceConfig,
+} from "@/lib/rustdoc/rustdoc";
+import { getRustdocStaticSlugsFromJson } from "@/lib/rustdoc/utils";
 import { metadataGenerator } from "@/lib/util/metadata";
 
 export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
   const params = await props.params;
   if (!params.slug || params.slug.length === 0) redirect("/docs/intro");
+
+  const rustdocSource = getRustdocSourceForSlug(RUSTDOC_SOURCES, params.slug);
+  if (rustdocSource) return <RustdocPage slug={params.slug} />;
 
   const page = docsSource.getPage(params.slug);
   if (!page) notFound();
@@ -114,14 +126,38 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 }
 
 export async function generateStaticParams() {
-  return [{ slug: [] }, ...docsSource.generateParams()];
+  const rustdocParams = await Promise.all(
+    RUSTDOC_SOURCES.map(async (source) => {
+      const prefix = getRustdocSourceSlugPrefix(source);
+      const slugs = getStaticSlugsForRustdocSource(source);
+
+      return slugs.map((slug) => ({ slug: [...prefix, ...slug] }));
+    }),
+  );
+
+  return [
+    { slug: [] },
+    ...docsSource.generateParams(),
+    ...rustdocParams.flat(),
+  ];
 }
+
 
 export async function generateMetadata(
   props: PageProps<"/docs/[[...slug]]">,
 ): Promise<Metadata> {
   const { slug } = await props.params;
   if (!slug || slug.length === 0) return {};
+
+  const rustdocSource = getRustdocSourceForSlug(RUSTDOC_SOURCES, slug);
+  if (rustdocSource) {
+    const metadata = getStaticMetadataForRustdocSource(rustdocSource, slug);
+
+    return metadataGenerator({
+      title: metadata?.title ?? rustdocSource.slug,
+      description: metadata?.description ?? "Runtime-loaded rustdoc",
+    })();
+  }
 
   const page = docsSource.getPage(slug);
   if (!page) notFound();
@@ -133,4 +169,35 @@ export async function generateMetadata(
   });
 
   return generate();
+}
+
+function getStaticMetadataForRustdocSource(
+  source: RustdocSourceConfig,
+  slug: string[],
+): { title?: string; description?: string } | undefined {
+  if (source.url !== "/debug/rustdoc.json") return;
+
+  const pageSlug = getRustdocPageSlug(source, slug);
+  const json = normalizeRustdocJson(debugRustdoc);
+  const page = json.pages.find((candidate) => {
+    const candidateSlug = candidate.slugs ?? [];
+    return candidateSlug.join("/") === pageSlug.join("/");
+  });
+
+  if (page) {
+    return {
+      title: page.data.title,
+      description: page.data.description,
+    };
+  }
+
+  const meta = json.metas.find((candidate) => {
+    const metaSlug = candidate.path.replace(/\/?meta\.json$/, "").split("/");
+    const normalizedMetaSlug =
+      metaSlug.length === 1 && metaSlug[0] === "" ? [] : metaSlug;
+
+    return normalizedMetaSlug.join("/") === pageSlug.join("/");
+  });
+
+  return meta?.data;
 }
