@@ -1,5 +1,6 @@
 minimumReleaseAge: 3600
 minimumReleaseAgeStrict: true
+saveExact: true
 
 allowBuilds:
   esbuild: true
