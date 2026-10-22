@@ -2,7 +2,7 @@
 experimental = true
 
 [tools]
-node = "24"
+node = "26"
 
 [hooks]
 postinstall = 'npx corepack enable'

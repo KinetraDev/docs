@@ -16,15 +16,6 @@ import {
 import { useI18n } from "fumadocs-ui/contexts/i18n";
 import { useDocsSearch } from "fumadocs-core/search/client";
 
-import { create as createOrama } from "@orama/orama";
-
-function initOrama() {
-  return createOrama({
-    schema: { _: "string" },
-    language: "english",
-  });
-}
-
 type StaticSearchDialogProps = SharedProps;
 
 export const StaticSearchDialog: FunctionComponent<StaticSearchDialogProps> = (
@@ -33,7 +24,6 @@ export const StaticSearchDialog: FunctionComponent<StaticSearchDialogProps> = (
   const { locale } = useI18n();
   const { search, setSearch, query } = useDocsSearch({
     type: "static",
-    initOrama,
     locale,
     from: "/api/search.json",
   });

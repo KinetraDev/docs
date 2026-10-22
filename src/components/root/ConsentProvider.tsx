@@ -3,7 +3,8 @@ import type { FunctionComponent, ReactNode } from "react";
 import {
   ConsentBanner,
   ConsentDialog,
-  ConsentManagerProvider,
+  ConsentRoot,
+  offline,
 } from "@c15t/nextjs";
 import { useTheme } from "next-themes";
 
@@ -20,16 +21,15 @@ export const ConsentProvider: FunctionComponent<ConsentProviderProps> = ({
 
   // biome-ignore lint/correctness/noUnreachable: not yet used
   return (
-    <ConsentManagerProvider
+    <ConsentRoot
       options={{
-        mode: "offline",
+        mode: offline(),
         colorScheme: resolvedTheme === "dark" ? "dark" : "light",
-        // add scripts here when needed
       }}
     >
       <ConsentBanner />
       <ConsentDialog />
       {children}
-    </ConsentManagerProvider>
+    </ConsentRoot>
   );
 };

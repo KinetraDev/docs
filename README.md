@@ -49,19 +49,19 @@ mise trust
 mise install
 ```
 
-Install dependencies with the Bun version managed by `mise`:
+Install dependencies with the pnpm version pinned in `package.json`:
 ```bash
-bun install
+pnpm install
 ```
 
 Start the development server:
 ```bash
-bun dev
+pnpm dev
 ```
 
 Other useful commands:
 ```bash
-bun run lint
-bun run format
-bun run build
+pnpm run lint
+pnpm run format
+pnpm run build
 ```
